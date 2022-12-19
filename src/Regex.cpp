@@ -1,5 +1,5 @@
 
-#include "onig-reg-exp.hpp"
+#include "Regex.hpp"
 
 using ::v8::Exception;
 using ::v8::String;

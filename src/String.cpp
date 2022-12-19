@@ -1,5 +1,5 @@
 
-#include "onig-string.hpp"
+#include "String.hpp"
 
 using ::v8::FunctionTemplate;
 using ::v8::Context;

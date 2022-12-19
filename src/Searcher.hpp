@@ -2,9 +2,9 @@
 #define Header_Oni_Searcher
 
 #include <vector>
-#include "onig-string.hpp"
-#include "onig-reg-exp.hpp"
-#include "onig-result.hpp"
+#include "String.hpp"
+#include "Regex.hpp"
+#include "Result.hpp"
 
 using ::std::shared_ptr;
 using ::std::vector;

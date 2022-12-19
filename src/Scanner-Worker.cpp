@@ -1,5 +1,5 @@
 
-#include "onig-scanner-worker.hpp"
+#include "Scanner-Worker.hpp"
 
 using ::v8::Array;
 using ::v8::Number;

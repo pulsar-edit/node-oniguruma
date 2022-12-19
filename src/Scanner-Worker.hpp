@@ -5,8 +5,8 @@
 #include <vector>
 
 #include "nan.h"
-#include "onig-reg-exp.hpp"
-#include "onig-searcher.hpp"
+#include "Regex.hpp"
+#include "Searcher.hpp"
 
 using ::std::shared_ptr;
 using ::std::vector;

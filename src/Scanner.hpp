@@ -2,10 +2,10 @@
 #define Header_Oni_Scanner
 
 #include "nan.h"
-#include "onig-string.hpp"
-#include "onig-result.hpp"
-#include "onig-reg-exp.hpp"
-#include "onig-searcher.hpp"
+#include "String.hpp"
+#include "Result.hpp"
+#include "Regex.hpp"
+#include "Searcher.hpp"
 
 using ::std::shared_ptr;
 using ::std::vector;

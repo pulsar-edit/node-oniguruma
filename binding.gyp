@@ -94,12 +94,12 @@
 		'include_dirs' : [ '<!(node -e "require(\'nan\')")' ] ,
 
 		'sources' : [
-			'src/onig-result.cpp' ,
-			'src/onig-reg-exp.cpp' ,
-			'src/onig-scanner.cpp' ,
-			'src/onig-scanner-worker.cpp' ,
-			'src/onig-searcher.cpp' ,
-			'src/onig-string.cpp'
+			'src/Result.cpp' ,
+			'src/Regex.cpp' ,
+			'src/Scanner.cpp' ,
+			'src/Scanner-Worker.cpp' ,
+			'src/Searcher.cpp' ,
+			'src/String.cpp'
 		],
 
 		'conditions' : [[

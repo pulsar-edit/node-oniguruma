@@ -1,6 +1,6 @@
 
-#include "onig-scanner-worker.hpp"
-#include "onig-scanner.hpp"
+#include "Scanner-Worker.hpp"
+#include "Scanner.hpp"
 
 
 using ::v8::FunctionTemplate;

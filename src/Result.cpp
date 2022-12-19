@@ -1,5 +1,5 @@
 
-#include "onig-result.hpp"
+#include "Result.hpp"
 
 
 OnigResult::OnigResult(
