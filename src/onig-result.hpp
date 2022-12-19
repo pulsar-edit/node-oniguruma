@@ -1,5 +1,5 @@
-#ifndef Header_Result
-#define Header_Result
+#ifndef Header_Oni_Result
+#define Header_Oni_Result
 
 #include "oniguruma.h"
 #include "nan.h"

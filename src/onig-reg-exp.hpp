@@ -1,5 +1,5 @@
-#ifndef SRC_ONIG_REG_EXP_H_
-#define SRC_ONIG_REG_EXP_H_
+#ifndef Header_Oni_Regex
+#define Header_Oni_Regex
 
 #include <memory>
 #include <string>
@@ -10,26 +10,42 @@
 using ::std::shared_ptr;
 using ::std::string;
 
+
 class OnigRegExp {
- public:
-  explicit OnigRegExp(const string& source);
-  ~OnigRegExp();
 
-  shared_ptr<OnigResult> Search(OnigString* str, int position);
+	private:
 
- private:
-  OnigRegExp(const OnigRegExp&);  // Disallow copying
-  OnigRegExp &operator=(const OnigRegExp&);  // Disallow copying
+		shared_ptr<OnigResult> lastSearchResult;
 
-  shared_ptr<OnigResult> Search(const char* data, size_t position, size_t end);
+		int lastSearchStrUniqueId ,
+			lastSearchPosition ;
 
-  string source_;
-  regex_t* regex_;
+		bool hasGAnchor;
 
-  bool hasGAnchor;
-  int lastSearchStrUniqueId;
-  int lastSearchPosition;
-  shared_ptr<OnigResult> lastSearchResult;
+		regex_t * regex_;
+		string source_;
+
+
+		auto Search ( const char * data , size_t position , size_t end )
+			-> shared_ptr<OnigResult> ;
+
+
+		// Disallow copying
+
+		OnigRegExp & operator = ( const OnigRegExp & );
+
+		OnigRegExp ( const OnigRegExp & );
+
+
+	public:
+
+		explicit OnigRegExp ( const string & source );
+
+		~OnigRegExp();
+
+		auto Search ( OnigString * , int position )
+			-> shared_ptr<OnigResult> ;
+
 };
 
-#endif  // SRC_ONIG_REG_EXP_H_
+#endif
