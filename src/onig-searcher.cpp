@@ -1,32 +1,47 @@
+
 #include "onig-searcher.hpp"
 
-shared_ptr<OnigResult> OnigSearcher::Search(OnigString* source, int charOffset) {
-  int byteOffset = source->ConvertUtf16OffsetToUtf8(charOffset);
 
-  int bestLocation = 0;
-  shared_ptr<OnigResult> bestResult;
+auto OnigSearcher::Search( OnigString * source , int charOffset )
+	-> shared_ptr<OnigResult> {
 
-  vector< shared_ptr<OnigRegExp> >::iterator iter = regExps.begin();
-  int index = 0;
-  while (iter < regExps.end()) {
-    OnigRegExp *regExp = (*iter).get();
-    shared_ptr<OnigResult> result = regExp->Search(source, byteOffset);
-    if (result != NULL && result->Count() > 0) {
-      int location = result->LocationAt(0);
+	int byteOffset = source
+		-> ConvertUtf16OffsetToUtf8(charOffset);
 
-      if (bestResult == NULL || location < bestLocation) {
-        bestLocation = location;
-        bestResult = result;
-        bestResult->SetIndex(index);
-      }
 
-      if (location == byteOffset) {
-        break;
-      }
-    }
-    ++index;
-    ++iter;
-  }
+	int bestLocation = 0 ,
+		index = 0 ;
 
-  return bestResult;
+	shared_ptr<OnigResult> bestResult;
+
+
+	auto iter = regExps.begin();
+
+	while ( iter < regExps.end() ){
+
+		auto regex = ( * iter ).get();
+
+		auto match = regex
+			-> Search(source,byteOffset);
+
+		if( match != NULL && match -> Count() > 0 ){
+
+			int location = match
+				-> LocationAt(0);
+
+			if( bestResult == NULL || location < bestLocation ){
+				bestLocation = location;
+				bestResult = match;
+				bestResult -> SetIndex(index);
+			}
+
+			if( location == byteOffset )
+				break;
+		}
+
+		++index;
+		++iter;
+	}
+
+	return bestResult;
 }

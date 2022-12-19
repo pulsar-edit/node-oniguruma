@@ -1,5 +1,5 @@
-#ifndef SRC_ONIG_SEARCHER_H_
-#define SRC_ONIG_SEARCHER_H_
+#ifndef Header_Oni_Searcher
+#define Header_Oni_Searcher
 
 #include <vector>
 #include "onig-string.hpp"
@@ -9,17 +9,23 @@
 using ::std::shared_ptr;
 using ::std::vector;
 
+
 class OnigSearcher {
- public:
-  explicit OnigSearcher(vector<shared_ptr<OnigRegExp>> regExps)
-    : regExps(regExps) {}
 
-  ~OnigSearcher() {}
+	private:
 
-  shared_ptr<OnigResult> Search(OnigString* source, int charOffset);
+		vector<shared_ptr<OnigRegExp>> regExps;
 
- private:
-  vector<shared_ptr<OnigRegExp>> regExps;
+	public:
+
+		explicit OnigSearcher ( vector<shared_ptr<OnigRegExp>> regExps )
+			: regExps(regExps) {}
+
+		~OnigSearcher (){}
+
+		auto Search ( OnigString * source , int charOffset )
+			-> shared_ptr<OnigResult> ;
+
 };
 
-#endif  // SRC_ONIG_SEARCHER_H_
+#endif
