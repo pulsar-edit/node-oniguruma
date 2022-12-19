@@ -33,6 +33,6 @@
   },
   "scripts": {
     "test": "jasmine-focused --captureExceptions spec/",
-    "benchmark": "benchmark/benchmark.coffee"
+    "benchmark": "benchmark/benchmark.js"
   }
 }
