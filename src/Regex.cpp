@@ -6,8 +6,8 @@ using ::v8::String;
 
 
 OnigRegExp::OnigRegExp ( const string & source )
-    : source_(source) ,
-      regex_(NULL) {
+    : source_(source)
+	, regex_(NULL) {
 
 	lastSearchStrUniqueId = -1;
 	lastSearchPosition = -1;
@@ -16,7 +16,7 @@ OnigRegExp::OnigRegExp ( const string & source )
 
 	hasGAnchor = false;
 
-	const int length =
+	const size_t length =
 		source.size();
 
 	for ( size_t index = 0 ; index < length ; index++ ){

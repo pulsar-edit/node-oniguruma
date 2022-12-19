@@ -22,8 +22,8 @@ class OnigRegExp {
 
 		bool hasGAnchor;
 
-		regex_t * regex_;
 		string source_;
+		regex_t * regex_;
 
 
 		auto Search ( const char * data , size_t position , size_t end )
