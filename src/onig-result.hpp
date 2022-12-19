@@ -1,26 +1,42 @@
-#ifndef SRC_ONIG_RESULT_H_
-#define SRC_ONIG_RESULT_H_
+#ifndef Header_Result
+#define Header_Result
 
-#include "nan.h"
 #include "oniguruma.h"
+#include "nan.h"
+
 
 class OnigResult {
- public:
-  explicit OnigResult(OnigRegion* region, int indexInScanner);
-  ~OnigResult();
 
-  int Count();
-  int LocationAt(int index);
-  int LengthAt(int index);
-  int Index() { return indexInScanner; }
-  void SetIndex(int newIndex) { indexInScanner = newIndex; }
+	private:
 
- private:
-  OnigResult(const OnigResult&);  // Disallow copying
-  OnigResult &operator=(const OnigResult&);  // Disallow copying
+		OnigRegion * region_;
+		int indexInScanner;
 
-  OnigRegion *region_;
-  int indexInScanner;
+		// Disallow copying
+
+		OnigResult & operator = ( const OnigResult & );
+		OnigResult ( const OnigResult & );
+
+
+	public:
+
+		explicit OnigResult (
+			OnigRegion * region ,
+			int indexInScanner );
+
+		~OnigResult ();
+
+		auto LocationAt ( int ) -> int ;
+		auto LengthAt ( int ) -> int ;
+		auto Count () -> int ;
+
+		auto Index () -> int
+			{ return indexInScanner; }
+
+		void SetIndex ( int newIndex )
+			{ indexInScanner = newIndex; }
+
 };
 
-#endif  // SRC_ONIG_RESULT_H_
+
+#endif
