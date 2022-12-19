@@ -1,61 +1,93 @@
+
 'use strict'
 
-const OnigScanner = require('../build/Release/onig_scanner.node').OnigScanner
-const OnigString = require('../build/Release/onig_scanner.node').OnigString
+const { OnigScanner } = require('../build/Release/onig_scanner.node')
+const { OnigString } = require('../build/Release/onig_scanner.node')
 
-function OnigRegExp(source) {
-  this.source = source;
-  this.scanner = new OnigScanner([this.source]);
+
+class OnigRegExp {
+
+	constructor ( source ){
+
+		this.scanner = new OnigScanner([ source ]);
+		this.source = source;
+	}
+
+
+	captureIndicesForMatch ( string , match ){
+
+		if( match == null )
+			return null
+
+		const { captureIndices } = match;
+
+		string = this.scanner
+			.convertToString(string);
+
+		for ( const capture of captureIndices ){
+
+			const { start , end } = capture;
+
+			capture.match = string
+				.slice(start,end);
+		}
+
+		return captureIndices
+	}
+
+
+	searchSync ( string , startPosition = 0 ){
+
+		const match = this.scanner
+			.findNextMatchSync(string,startPosition);
+
+		return this.captureIndicesForMatch(string,match);
+	}
+
+
+	search ( string , startPosition = 0 , callback ){
+
+		if(typeof startPosition === 'function'){
+			callback = startPosition;
+			startPosition = 0;
+		}
+
+		const onMatch = ( error , match ) => {
+
+			if( typeof callback !== 'function' )
+				return;
+
+			const indices = this
+				.captureIndicesForMatch(string,match);
+
+			callback(error,indices);
+		}
+
+		return this.scanner
+			.findNextMatch(string,startPosition,onMatch);
+	}
+
+
+	testSync ( string ){
+		return this.searchSync(string) != null
+	}
+
+
+	test ( string , callback ){
+
+		const onFind = ( error , result ) => {
+
+			if( typeof callback !== 'function' )
+				return
+
+			callback(error,result != null);
+		}
+
+		return this.search(string,0,onFind);
+	}
 }
 
-OnigRegExp.prototype.captureIndicesForMatch = function(string, match) {
-  var capture, captureIndices, i, len;
-  if (match != null) {
-    captureIndices = match.captureIndices;
-    string = this.scanner.convertToString(string);
-    for (i = 0, len = captureIndices.length; i < len; i++) {
-      capture = captureIndices[i];
-      capture.match = string.slice(capture.start, capture.end);
-    }
-    return captureIndices;
-  } else {
-    return null;
-  }
-};
 
-OnigRegExp.prototype.searchSync = function(string, startPosition) {
-  var match;
-  if (startPosition == null) {
-    startPosition = 0;
-  }
-  match = this.scanner.findNextMatchSync(string, startPosition);
-  return this.captureIndicesForMatch(string, match);
-};
-
-OnigRegExp.prototype.search = function(string, startPosition, callback) {
-  if (startPosition == null) {
-    startPosition = 0;
-  }
-  if (typeof startPosition === 'function') {
-    callback = startPosition;
-    startPosition = 0;
-  }
-  return this.scanner.findNextMatch(string, startPosition, (function(_this) {
-    return function(error, match) {
-      return typeof callback === "function" ? callback(error, _this.captureIndicesForMatch(string, match)) : void 0;
-    };
-  })(this));
-};
-
-OnigRegExp.prototype.testSync = function(string) {
-  return this.searchSync(string) != null;
-};
-
-OnigRegExp.prototype.test = function(string, callback) {
-  return this.search(string, 0, function(error, result) {
-    return typeof callback === "function" ? callback(error, result != null) : void 0;
-  });
-};
 
 OnigScanner.prototype.findNextMatch = function (string, startPosition, callback) {
   if (startPosition == null) startPosition = 0
