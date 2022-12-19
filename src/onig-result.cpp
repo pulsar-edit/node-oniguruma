@@ -1,4 +1,4 @@
-#include "onig-result.h"
+#include "onig-result.hpp"
 
 OnigResult::OnigResult(OnigRegion* region, int indexInScanner)
   : region_(region), indexInScanner(indexInScanner) {}

@@ -1,4 +1,4 @@
-#include "onig-reg-exp.h"
+#include "onig-reg-exp.hpp"
 
 using ::v8::Exception;
 using ::v8::String;

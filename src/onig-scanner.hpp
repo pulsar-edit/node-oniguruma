@@ -2,10 +2,10 @@
 #define SRC_ONIG_SCANNER_H_
 
 #include "nan.h"
-#include "onig-string.h"
-#include "onig-result.h"
-#include "onig-reg-exp.h"
-#include "onig-searcher.h"
+#include "onig-string.hpp"
+#include "onig-result.hpp"
+#include "onig-reg-exp.hpp"
+#include "onig-searcher.hpp"
 
 using ::v8::Array;
 using ::v8::Function;

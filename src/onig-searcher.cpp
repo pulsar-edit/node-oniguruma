@@ -1,4 +1,4 @@
-#include "onig-searcher.h"
+#include "onig-searcher.hpp"
 
 shared_ptr<OnigResult> OnigSearcher::Search(OnigString* source, int charOffset) {
   int byteOffset = source->ConvertUtf16OffsetToUtf8(charOffset);

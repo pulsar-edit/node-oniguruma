@@ -89,17 +89,17 @@
 
 		'target_name' : 'onig_scanner' ,
 
-		'dependencies' : ['oniguruma' ] ,
+		'dependencies' : [ 'oniguruma' ] ,
 
 		'include_dirs' : [ '<!(node -e "require(\'nan\')")' ] ,
 
 		'sources' : [
-			'src/onig-result.cc' ,
-			'src/onig-reg-exp.cc' ,
-			'src/onig-scanner.cc' ,
-			'src/onig-scanner-worker.cc' ,
-			'src/onig-searcher.cc' ,
-			'src/onig-string.cc'
+			'src/onig-result.cpp' ,
+			'src/onig-reg-exp.cpp' ,
+			'src/onig-scanner.cpp' ,
+			'src/onig-scanner-worker.cpp' ,
+			'src/onig-searcher.cpp' ,
+			'src/onig-string.cpp'
 		],
 
 		'conditions' : [[
@@ -158,7 +158,6 @@
 
 				'cflags' : [ '-std=c++17' ]
 			}
-		]
-		]
+		]]
 	}]
 }

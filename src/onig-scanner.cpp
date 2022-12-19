@@ -1,5 +1,5 @@
-#include "onig-scanner.h"
-#include "onig-scanner-worker.h"
+#include "onig-scanner.hpp"
+#include "onig-scanner-worker.hpp"
 
 using ::v8::FunctionTemplate;
 using ::v8::Context;

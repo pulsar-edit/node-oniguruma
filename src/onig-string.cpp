@@ -1,4 +1,4 @@
-#include "onig-string.h"
+#include "onig-string.hpp"
 
 using ::v8::FunctionTemplate;
 using ::v8::Context;
