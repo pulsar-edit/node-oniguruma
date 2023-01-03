@@ -1,9 +1,13 @@
 name: CI
 
-on: [push]
+on:
+  - push
+  - pull_request
 
-env:
-  CI: true
+#env:
+  #CI defaults to true, this is not needed
+  #https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+  #CI: true
 
 jobs:
   Test:
@@ -13,15 +17,22 @@ jobs:
         channel: [stable, beta]
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v2
+    - name: Checkout the latest code
+      uses: actions/checkout@v2
+      
+    - name: Setup node
+      uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: 16
+        cache: npm
+    
     - name: Install windows-build-tools
       if: ${{ matrix.os == 'windows-latest' }}
       run: |
         npm config set msvs_version 2019
+    
     - name: Install dependencies
       run: npm i
+    
     - name: Run tests
       run: npm run test
